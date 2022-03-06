@@ -30,9 +30,9 @@ PaymentDates <- function(today, frequency = 6 , origin = "1970-01-01", semesters
 DiscountFactor <- function (curve, T){
     intervals_r <- c(3,12,36,60,120)
     intervals_l <- c(0,3,12,36,60)
-    mask <- intervals_l < T
+    mask <- intervals_l <= T
     minimum <- pmin(T, intervals_r)
-    areas <- (minimum-intervals_l)*curve*mask
+    areas <- ((minimum-intervals_l)/12)*curve*mask
     sum_areas<- sum(areas)
     discount <- as.numeric(exp(-(sum_areas)))
     return (discount)
