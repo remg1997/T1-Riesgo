@@ -45,9 +45,9 @@ def discountfactor(curve, T):
     """
     intervals_r=[3,12,36,60,120]
     intervals_l=[0,3,12,36,60]
-    mask = [(t<T) for t in intervals_l]
+    mask = [(t<=T) for t in intervals_l]
     minimum = np.minimum(T, intervals_r)
-    areas = (minimum-intervals_l)*curve*mask
+    areas = (minimum-intervals_l)*curve*mask/12
     totalarea = np.sum(areas)
     discountfactor = np.exp(-totalarea)
     return discountfactor
