@@ -33,7 +33,8 @@ def rateconverter(rate, T, today):
     """
     days = (today[0].date()+relativedelta(months=T) - today[0].date()).days
     newrate = rate*(days/360)
-    return newrate
+    rounded = np.around(newrate, 15)
+    return rounded
 
 def discountfactor(curve, T):
     """
@@ -50,4 +51,5 @@ def discountfactor(curve, T):
     areas = (minimum-intervals_l)*curve*mask/12
     totalarea = np.sum(areas)
     discountfactor = np.exp(-totalarea)
+    rounded = np.around(discountfactor, 15)
     return discountfactor
