@@ -48,8 +48,8 @@ def discountfactor(curve, T):
     intervals_l=[0,3,12,36,60]
     mask = [(t<=T) for t in intervals_l]
     minimum = np.minimum(T, intervals_r)
-    areas = (minimum-intervals_l)*curve*mask/12
-    totalarea = np.sum(areas)
+    areas = np.around((minimum-intervals_l)*np.around(curve,9)*mask/12, 8)
+    totalarea = np.sum(areas)    
     discountfactor = np.exp(-totalarea)
     rounded = np.around(discountfactor, 15)
     return discountfactor
