@@ -40,6 +40,7 @@ DiscountFactor <- function (curve, T){
 
 RateConverter <- function(rate, T, today){
     days <- as.numeric(-difftime(today, today %m+% months(T) , units = "days"))
-    newrate <- rate*(days/360)
+    semrate <- (1+rate)^{1/2}-1
+    newrate <- semrate*(days/360) #(days/360)
     return (newrate)
 }
