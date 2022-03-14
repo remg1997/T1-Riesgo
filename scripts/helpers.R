@@ -41,6 +41,25 @@ DiscountFactor <- function (curve, T){
 RateConverter <- function(rate, T, today){
     days <- as.numeric(-difftime(today, today %m+% months(T) , units = "days"))
     semrate <- (1+rate)^{1/2}-1
-    newrate <- semrate*(days/360) #(days/360)
+    newrate <- rate*(days/360) #(days/360)
     return (newrate)
+}
+
+
+alphacuts <- function(alpha){
+    ls <- list()
+    for (x in 1:120){
+        if (x<=3){
+            ls<- append(ls, alpha[[1]]) 
+        } else if (x<=12){
+            ls<- append(ls, alpha[[2]]) 
+        } else if (x<=36){
+            ls<- append(ls, alpha[[3]]) 
+        } else if (x<=60){
+            ls<- append(ls, alpha[[4]]) 
+        } else if (x<=120){
+            ls<- append(ls, alpha[[5]]) 
+        }
+    }
+    return (ls)
 }
