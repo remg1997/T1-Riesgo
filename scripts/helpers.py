@@ -23,6 +23,12 @@ def dataframe(path):
             df = df.merge(tempdf, on= "Date")
         return df
     
+def threemonthrateconverter(rate,T, today):
+    days = (today[0].date()+relativedelta(months=T) - today[0].date()).days
+    semrate = ((1+rate)**(1/4))-1
+    newrate = semrate*(days/360)
+    return newrate
+    
 def rateconverter(rate, T, today):
     """
     Returns a converted interest rate, for a desired maturity.
@@ -32,9 +38,9 @@ def rateconverter(rate, T, today):
         today: current date, expressed as a DateTimeIndex
     """
     days = (today[0].date()+relativedelta(months=T) - today[0].date()).days
-    newrate = rate*(days/360)
-    rounded = np.around(newrate, 15)
-    return rounded
+    semrate = ((1+rate)**(1/2))-1
+    newrate = semrate*(days/360)
+    return newrate
 
 def discountfactor(curve, T):
     """
