@@ -51,6 +51,8 @@ RateConverter <- function(rate, T, today){
 }
 
 
+
+
 alphacuts <- function(alpha){
     ls <- list()
     for (x in 1:120){
@@ -68,3 +70,4 @@ alphacuts <- function(alpha){
     }
     return (ls)
 }
+
